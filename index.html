@@ -80,20 +80,20 @@
     p { margin: 0 0 16px; color: var(--muted); font-size: 0.98rem; }
      
     .inline-role-panel {
-      width: 100%; display: flex; align-items: center; gap: 32px; padding: 32px; 
+      width: 100%; display: flex; align-items: center; gap: 36px; padding: 32px; 
       background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
       margin-top: 8px; box-shadow: var(--shadow); flex-wrap: wrap;
     }
-    /* INCREASED PROFILE IMAGE FRAME SIZE HERE */
+    /* EXTRA EXTRA LARGE PROFILE IMAGE FRAME */
     .profile-image-container {
-      width: 160px; height: 160px; border-radius: 14px; overflow: hidden;
-      border: 3px solid var(--accent); flex-shrink: 0; box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+      width: 220px; height: 220px; border-radius: 16px; overflow: hidden;
+      border: 4px solid var(--accent); flex-shrink: 0; box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
       background: var(--panel2); display: flex; align-items: center; justify-content: center;
     }
     .profile-image-container img { width: 100%; height: 100%; object-fit: cover; }
-    .role-details { display: flex; align-items: center; justify-content: space-between; flex-grow: 1; flex-wrap: wrap; gap: 16px; }
-    .role-title-group h3 { margin: 0 0 4px; font-size: 1.25rem; }
-    .role-title-group p { margin: 0; font-size: 1rem; color: var(--accent2); font-weight: 700; }
+    .role-details { display: flex; align-items: center; justify-content: space-between; flex-grow: 1; flex-wrap: wrap; gap: 24px; }
+    .role-title-group h3 { margin: 0 0 6px; font-size: 1.4rem; }
+    .role-title-group p { margin: 0; font-size: 1.05rem; color: var(--accent2); font-weight: 700; }
      
     .hero-card, .card, .panel {
       background: var(--panel);
@@ -165,7 +165,7 @@
     .footer { padding: 40px 24px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); margin-top: 40px; font-size: 0.84rem; }
     .print-note { display: none; }
     @media (max-width: 900px) {
-      .inline-role-panel { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+      .inline-role-panel { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
       .role-details { flex-direction: column; align-items: center; }
       .chips { justify-content: center; }
       .grid.cols-2 { grid-template-columns: 1fr; }
