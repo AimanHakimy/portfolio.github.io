@@ -414,8 +414,8 @@
       </div>
 
       <div class="grid cols-2" id="projectGrid">
-        <article class="card project-card" data-cat="unity 3d" onclick="showProject(0)"><div class="project-cover">🗺️</div><div class="project-body"><h3>TRaDC AR :Permainan Traditional</h3><p>Digital cultural game preservation engine utilizing custom built 3D modeling and animation </p><span class="tag">Unity</span><span class="tag">3D Modeling</span><span class="tag">AR Animation</span></div></article>
-        <article class="card project-card" data-cat="unity 3d" onclick="showProject(1)"><div class="project-cover">🏝️</div><div class="project-body"><h3>Forgotten Island </h3><p>An interactive 3D environment built to showcase fully rigged model structures and optimized landscape geometry.</p><span class="tag">Unity</span><span class="tag">3D Animation</span><span class="tag">Mesh Optimization</span></div></article>
+        <article class="card project-card" data-cat="unity 3d" onclick="showProject(0)"><div class="project-cover">🗺️</div><div class="project-body"><h3>TRaDC AR :Permainan Traditional</h3><p>Digital cultural game preservation engine utilizing custom built 3D modeling and animation</p><span class="tag">Unity</span><span class="tag">3D Modeling</span><span class="tag">AR Animation</span></div></article>
+        <article class="card project-card" data-cat="unity 3d" onclick="showProject(1)"><div class="project-cover">🏝️</div><div class="project-body"><h3>Forgotten Island</h3><p>An interactive 3D environment built to showcase fully rigged model structures and optimized landscape geometry.</p><span class="tag">Unity</span><span class="tag">3D Animation</span><span class="tag">Mesh Optimization</span></div></article>
         <article class="card project-card" data-cat="network" onclick="showProject(2)"><div class="project-cover">🎛️</div><div class="project-body"><h3>Data Communication Model Mapping</h3><p>Academic coursework detailing the mapping of Data Communication models, OSI layers, and TCP/IP protocol suites.</p><span class="tag">Networking</span><span class="tag">Cisco</span><span class="tag">OSI Model</span></div></article>
         <article class="card project-card" data-cat="web" onclick="showProject(3)"><div class="project-cover">🔒</div><div class="project-body"><h3>Secure Login Interface</h3><p>A prototype login page with usability & security features.</p><span class="tag">HTML5</span><span class="tag">JavaScript</span><span class="tag">Cybersecurity</span></div></article>
       </div>
@@ -453,7 +453,6 @@
   </footer>
 
 <script>
-// Project structures updated with multiple image slide capabilities
 const projects = [
   {
     title:'TRaDC AR :Permainan Tradisional',
@@ -513,7 +512,6 @@ function showProject(i){
   document.getElementById('modalTitle').textContent=p.title;
   document.getElementById('modalIntro').textContent=p.intro;
   
-  // Slide Config Initialization
   currentProjectImages = p.images || [];
   currentSlideIndex = 0;
   
@@ -527,21 +525,19 @@ function showProject(i){
   if(currentProjectImages.length > 0) {
     sliderContainer.style.display = "block";
     
-    // Construct Slide Track Nodes
     currentProjectImages.forEach((imgSrc, idx) => {
       const slide = document.createElement('div');
       slide.className = 'slide';
-      slide.innerHTML = `<img src="${imgSrc}" alt="${p.title} Artifact Frame ${idx + 1}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23aaa\'>Image Pending</text></svg>';" onclick="openLightbox('${imgSrc}')">`;
+      // Removed the alternative broken graphic script background and text values completely
+      slide.innerHTML = `<img src="${imgSrc}" alt="Project Artifact Layout" onclick="openLightbox('${imgSrc}')">`;
       wrapper.appendChild(slide);
       
-      // Build Correlation Dots
       const dot = document.createElement('div');
       dot.className = `slider-dot ${idx === 0 ? 'active' : ''}`;
       dot.setAttribute('onclick', `goToSlide(${idx})`);
       dotsContainer.appendChild(dot);
     });
     
-    // Hide arrow mechanics if only one image exists
     const arrows = sliderContainer.querySelectorAll('.slider-arrow');
     arrows.forEach(arrow => {
       arrow.style.display = currentProjectImages.length <= 1 ? 'none' : 'flex';
@@ -561,14 +557,13 @@ function showProject(i){
       <tbody>
         <tr><td><strong>Development Tools</strong></td><td><code>${p.tools}</code></td></tr>
         <tr><td><strong>Demonstrated Skills</strong></td><td><strong>${p.skills}</strong></td></tr>
-        <tr><td><strong>Verifiable Evidence</strong></td><td>${p.evidence}</td></tr>
+        <tr><td><strong>Verifiable Evidence</strong></td><td>${p.evidence || 'Coursework documentation & blueprints'}</td></tr>
         <tr><td><strong>Production Reflection</strong></td><td><em>${p.reflection}</em></td></tr>
       </tbody>
     </table>`;
   document.getElementById('modal').classList.add('open');
 }
 
-// Slide Mechanics Controller Engines
 function moveSlide(direction) {
   currentSlideIndex += direction;
   if (currentSlideIndex >= currentProjectImages.length) currentSlideIndex = 0;
@@ -585,7 +580,6 @@ function updateSliderPosition() {
   const wrapper = document.getElementById('sliderWrapper');
   wrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
   
-  // Coordinate Dot State Layout updates
   const dots = document.querySelectorAll('.slider-dot');
   dots.forEach((dot, idx) => {
     if(idx === currentSlideIndex) {
