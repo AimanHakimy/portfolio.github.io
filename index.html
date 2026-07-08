@@ -238,6 +238,32 @@
       background: var(--accent);
       transform: scale(1.2);
     }
+
+    /* PDF Action View Container styling */
+    .pdf-action-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .pdf-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pdf-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+    }
         
     .lightbox {
       position: fixed; inset: 0; background: rgba(3, 2, 9, 0.95); backdrop-filter: blur(12px);
@@ -376,14 +402,8 @@
                 <td>Explore complex, procedural PBR node groups and hard-surface geometry modifiers.</td>
               </tr>
               <tr>
-                <td><strong>3D Animation Cycles</strong></td>
-                <td>Strong foundation in custom transformation interpolation and basic physics rigs.</td>
-                <td>Study complex mechanical mechanics, bone layout limitations, and complex interactive blending graphs.</td>
-              </tr>
-              <tr>
-                <td><strong>3D Application Dev (Unity)</strong></td>
-                <td>Proficient in fundamental client execution logic and custom asset rendering pipelines.</td>
-                <td>Build complex, modular state engines utilizing modern design patterns within interactive frameworks.</td>
+                <td>-- **3D Animation Cycles**: Strong foundation in custom transformation interpolation and basic physics rigs. Study complex mechanical mechanics, bone layout limitations, and complex interactive blending graphs.
+                <td>-- **3D Application Dev (Unity)**: Proficient in fundamental client execution logic and custom asset rendering pipelines. Build complex, modular state engines utilizing modern design patterns within interactive frameworks.
               </tr>
             </tbody>
           </table>
@@ -444,6 +464,9 @@
         <button class="x" onclick="closeModal()">Close</button>
       </div>
       
+      <!-- Dynamic View Hook for Full Multi-page Document Layout Rendering -->
+      <div id="pdfActionContainer" class="pdf-action-container" style="display: none;"></div>
+
       <div class="slider-container" id="modalSliderContainer">
         <button class="slider-arrow prev" onclick="moveSlide(-1)">&#10094;</button>
         <div class="slider-wrapper" id="sliderWrapper"></div>
@@ -523,7 +546,7 @@ function filterProjects(cat,evt){
 function showProject(i){
   const p=projects[i];
   document.getElementById('modalTitle').textContent=p.title;
-  document.getElementById('modalIntro').textContent=p.intro;
+  document.getElementById('modalIntro').textContent=p.intro || '';
   
   currentProjectImages = p.images || [];
   currentSlideIndex = 0;
@@ -531,9 +554,12 @@ function showProject(i){
   const sliderContainer = document.getElementById('modalSliderContainer');
   const wrapper = document.getElementById('sliderWrapper');
   const dotsContainer = document.getElementById('sliderDots');
+  const pdfActionContainer = document.getElementById('pdfActionContainer');
   
   wrapper.innerHTML = "";
   dotsContainer.innerHTML = "";
+  pdfActionContainer.innerHTML = "";
+  pdfActionContainer.style.display = "none";
   
   if(currentProjectImages.length > 0) {
     sliderContainer.style.display = "block";
@@ -548,7 +574,10 @@ function showProject(i){
       if(isVideo) {
         slide.innerHTML = `<video src="${imgSrc}" controls loop muted playsinline></video>`;
       } else if(isPDF) {
+        // Embed standard preview and register explicit tab launcher for native multi-page layout engine view
         slide.innerHTML = `<iframe src="${imgSrc}#toolbar=0" type="application/pdf"></iframe>`;
+        pdfActionContainer.innerHTML = `<button class="pdf-btn" onclick="window.open('${imgSrc}', '_blank')">📖 Open Full Document (All Pages)</button>`;
+        pdfActionContainer.style.display = "flex";
       } else {
         slide.innerHTML = `<img src="${imgSrc}" onclick="openLightbox('${imgSrc}')">`;
       }
