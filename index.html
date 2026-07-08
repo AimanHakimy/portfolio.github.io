@@ -167,13 +167,20 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      cursor: zoom-in;
     }
     .slide img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
+      cursor: zoom-in;
+    }
+    .slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+      outline: none;
     }
     .slider-arrow {
       position: absolute;
@@ -482,7 +489,7 @@ const projects = [
     tools:'Blender Armature Suite, Inverse Kinematics (IK) Modifiers, Weight Paint Arrays',
     skills:'Skeletal bone tree development, influence mesh calculation, transformation graph keyframing, rotation logic constraints',
     reflection:'Audited imported object data structures from SketchFab and constructed precise animation bone systems. Applied balanced weight calculations to prevent surface distortions along joints during organic locomotion loop cycles.',
-    images: ['login.png']
+    images: ['Final_Exam_077162.mp4']
   }
 ];
 
@@ -524,7 +531,16 @@ function showProject(i){
     currentProjectImages.forEach((imgSrc, idx) => {
       const slide = document.createElement('div');
       slide.className = 'slide';
-      slide.innerHTML = `<img src="${imgSrc}" onclick="openLightbox('${imgSrc}')">`;
+      
+      // Determine if media asset format is video by inspecting extension pattern
+      const isVideo = imgSrc.match(/\.(mp4|webm|ogg)$/i);
+      
+      if(isVideo) {
+        slide.innerHTML = `<video src="${imgSrc}" controls loop muted playsinline></video>`;
+      } else {
+        slide.innerHTML = `<img src="${imgSrc}" onclick="openLightbox('${imgSrc}')">`;
+      }
+      
       wrapper.appendChild(slide);
       
       const dot = document.createElement('div');
@@ -602,6 +618,11 @@ function openTab(evt,id){
 
 function closeModal(e){
   if(e && e.target.id!=='modal') return;
+  
+  // Pause any active videos playing inside modal slides upon closure
+  const modalVideos = document.querySelectorAll('#sliderWrapper video');
+  modalVideos.forEach(v => v.pause());
+  
   document.getElementById('modal').classList.remove('open');
 }
 
@@ -612,7 +633,6 @@ function openLightbox(src) {
   lb.classList.add('open');
 }
 
-// Ensure toggleAcc operates on valid structural nodes
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
@@ -629,7 +649,7 @@ window.addEventListener('load', animateBars);
 window.addEventListener('keydown',e=>{
   if(e.key==='Escape') {
     closeLightbox();
-    document.getElementById('modal').classList.remove('open');
+    closeModal();
   }
 });
 </script>
