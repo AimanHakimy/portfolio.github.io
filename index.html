@@ -69,7 +69,7 @@
       font-weight: 600; font-size: 0.88rem; cursor: pointer;
     }
     .links a:hover, .btn:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.04); }
-      
+        
     .hero {
       max-width: 1200px; margin: 0 auto; padding: 60px 24px 40px;
       display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
@@ -78,7 +78,7 @@
     h2 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 20px; font-weight: 750; color: var(--text); }
     h3 { margin: 0 0 8px; font-size: 1.1rem; font-weight: 650; }
     p { margin: 0 0 16px; color: var(--muted); font-size: 0.98rem; }
-      
+        
     .inline-role-panel {
       width: 100%; display: flex; align-items: center; gap: 36px; padding: 32px; 
       background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
@@ -93,20 +93,20 @@
     .role-details { display: flex; align-items: center; justify-content: space-between; flex-grow: 1; flex-wrap: wrap; gap: 24px; }
     .role-title-group h3 { margin: 0 0 6px; font-size: 1.4rem; }
     .role-title-group p { margin: 0; font-size: 1.05rem; color: var(--accent2); font-weight: 700; }
-      
+        
     .hero-card, .card, .panel {
       background: var(--panel);
       border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
     }
     .chips { display: flex; gap: 6px; flex-wrap: wrap; }
     .chip { padding: 5px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-size: 0.78rem; background: rgba(255, 255, 255, 0.01); font-weight: 600; }
-      
+        
     .section { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
     .grid { display: grid; gap: 20px; }
     .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
     .card { padding: 24px; }
     .card:hover { border-color: var(--accent); }
-      
+        
     .timeline { position: relative; margin-top: 15px; }
     .timeline:before { content: ""; position: absolute; left: 16px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
     .timeitem { position: relative; padding: 0 0 24px 44px; }
@@ -115,7 +115,7 @@
     .tab { padding: 8px 16px; border-radius: 4px; border: 1px solid transparent; background: transparent; cursor: pointer; color: var(--muted); font-weight: 600; font-size: 0.9rem; }
     .tab:hover { color: var(--text); }
     .tab.active { background: rgba(59, 130, 246, 0.08); border-color: var(--line); color: var(--accent); }
-      
+        
     .project-toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
     .filter { padding: 8px 16px; border: 1px solid var(--line); background: transparent; border-radius: 4px; color: var(--muted); cursor: pointer; font-size: 0.86rem; }
     .filter.active { border-color: var(--accent); background: rgba(59, 130, 246, 0.06); color: var(--accent); }
@@ -123,25 +123,25 @@
     .project-cover { height: 130px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(168, 85, 247, 0.03)); display: grid; place-items: center; font-size: 2.5rem; border-bottom: 1px solid var(--line); }
     .project-body { padding: 20px; }
     .tag { display: inline-block; margin: 4px 4px 4px 0; font-size: 0.74rem; padding: 3px 8px; border-radius: 4px; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.12); color: var(--accent); font-weight: 600; }
-      
+        
     .skill { margin: 16px 0; }
     .skill-top { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.9rem; }
     .bar { height: 8px; background: rgba(255, 255, 255, 0.02); border-radius: 4px; overflow: hidden; margin-top: 8px; border: 1px solid var(--line); }
     .fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 4px; transition: width 1s ease-in-out; }
-      
+        
     .accordion { border: 1px solid var(--line); border-radius: 8px; margin-bottom: 12px; overflow: hidden; background: rgba(255, 255, 255, 0.005); }
     .accordion button { width: 100%; text-align: left; background: transparent; color: var(--text); border: 0; padding: 18px; font-weight: 650; cursor: pointer; font-size: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
     .accordion button:hover { background: rgba(59, 130, 246, 0.02); }
     .acc-body { display: none; padding: 0 18px 18px; color: var(--muted); font-size: 0.95rem; border-top: 1px solid rgba(59, 130, 246, 0.05); padding-top: 14px; }
     .accordion.open .acc-body { display: block; }
-      
+        
     .modal { position: fixed; inset: 0; background: rgba(3, 2, 9, 0.85); backdrop-filter: blur(8px); z-index: 99; display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal.open { display: flex; }
     .modal-inner { max-width: 780px; width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); padding: 24px; max-height: 88vh; overflow: auto; }
     .modal-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
     .x { border: 1px solid var(--line); background: rgba(255, 255, 255, 0.03); color: var(--text); border-radius: 6px; padding: 6px 12px; cursor: pointer; font-weight: 600; }
     .x:hover { border-color: var(--accent); color: var(--accent); }
-      
+        
     /* Custom Modern Project Slider CSS */
     .slider-container {
       position: relative;
@@ -200,7 +200,7 @@
     }
     .slider-arrow.prev { left: 12px; }
     .slider-arrow.next { right: 12px; }
-    
+      
     .slider-dots {
       position: absolute;
       bottom: 14px;
@@ -225,7 +225,7 @@
       background: var(--accent);
       transform: scale(1.2);
     }
-      
+        
     .lightbox {
       position: fixed; inset: 0; background: rgba(3, 2, 9, 0.95); backdrop-filter: blur(12px);
       z-index: 150; display: none; align-items: center; justify-content: center;
@@ -528,8 +528,8 @@ function showProject(i){
     currentProjectImages.forEach((imgSrc, idx) => {
       const slide = document.createElement('div');
       slide.className = 'slide';
-      // Removed the alternative broken graphic script background and text values completely
-      slide.innerHTML = `<img src="${imgSrc}" alt="Project Artifact Layout" onclick="openLightbox('${imgSrc}')">`;
+      // Completely removed alt property attributes to clean out broken text flags
+      slide.innerHTML = `<img src="${imgSrc}" onclick="openLightbox('${imgSrc}')">`;
       wrapper.appendChild(slide);
       
       const dot = document.createElement('div');
@@ -557,7 +557,6 @@ function showProject(i){
       <tbody>
         <tr><td><strong>Development Tools</strong></td><td><code>${p.tools}</code></td></tr>
         <tr><td><strong>Demonstrated Skills</strong></td><td><strong>${p.skills}</strong></td></tr>
-        <tr><td><strong>Verifiable Evidence</strong></td><td>${p.evidence || 'Coursework documentation & blueprints'}</td></tr>
         <tr><td><strong>Production Reflection</strong></td><td><em>${p.reflection}</em></td></tr>
       </tbody>
     </table>`;
@@ -622,6 +621,7 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
 
+// Fixed toggleAcc function context
 function toggleAcc(btn){
   btn.parentElement.classList.toggle('open');
 }
