@@ -182,6 +182,12 @@
       background: #000;
       outline: none;
     }
+    .slide iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #ffffff;
+    }
     .slider-arrow {
       position: absolute;
       top: 50%;
@@ -423,6 +429,7 @@
         <article class="card project-card" data-cat="unity 3d" onclick="showProject(1)"><div class="project-cover">🏝️</div><div class="project-body"><h3>Forgotten Island</h3><p>An interactive 3D environment built to showcase fully rigged model structures and optimized landscape geometry.</p><span class="tag">Unity</span><span class="tag">3D Animation</span></div></article>
         <article class="card project-card" data-cat="3D" onclick="showProject(2)"><div class="project-cover">📐</div><div class="project-body"><h3>3D Modelling</h3><p>Make 3D model.</p><span class="tag">3d Modeling</span></div></article>
         <article class="card project-card" data-cat="3D" onclick="showProject(3)"><div class="project-cover">🦴</div><div class="project-body"><h3>Animation Rigging</h3><p>Make Animation Rigging only, the object take from SketchFab.</p><span class="tag">Animation</span></div></article>
+        <article class="card project-card" data-cat="AI" onclick="showProject(4)"><div class="project-cover">📖</div><div class="project-body"><h3>AI Storybook Generator</h3><p>Generative creative narrative layouts using artificial intelligence models and structured PDF formatting.</p><span class="tag">AI Generation</span><span class="tag">PDF Documentation</span></div></article>
       </div>
     </section>
   </main>
@@ -461,7 +468,6 @@
 const projects = [
   {
     title:'TRaDC AR :Permainan Tradisional',
-    intro:'Digital cultural game preservation engine using custom low-poly 3D models and animated interaction cycles.',
     tools:'Unity Engine, Vuforia SDK, Blender 3D, C# Compiler',
     skills:'3D Mesh generation, armature rigging configuration, transformation timeline animation, target mapping alignment',
     reflection:'Successfully mapped interactive AR trackers onto real-world targets. Focused closely on optimizing asset compression and runtime execution to eliminate lag frames during active camera tracking processes.',
@@ -469,7 +475,6 @@ const projects = [
   },
   {
     title:'Forgotten Island',
-    intro:'An interactive 3D application design environment built to showcase complex material mapping and organic layout animation curves.',
     tools:'Unity Engine, Blender Asset Suites, Custom Rigging Tools, Lighting Maps',
     skills:'Spatial system optimization, interactive skeletal rigging, mesh topology auditing, real-time lighting arrays',
     reflection:'Developed custom physics boundaries and ambient world rules to control environmental rendering layers. Optimized mesh rendering and material alpha channel maps to achieve clean scene runtime logs before building the client.',
@@ -477,7 +482,6 @@ const projects = [
   },
   {
     title:'3D Modelling',
-    intro:'Comprehensive construction of complex object layouts, optimized surface topologies, and procedural material texture channels.',
     tools:'Blender 3D, Autodesk Maya, Subsurface Map Baking Nodes',
     skills:'Hard-surface polygon distribution, UV shell layout packing, mesh smoothing subdivisions, HDRI lighting rules',
     reflection:'Designed high-to-low poly workflows with neat texture map sets. Polished vertex distributions along extreme edges to preserve structure definition while minimizing performance constraints for real-time engines.',
@@ -485,11 +489,17 @@ const projects = [
   },
   {
     title:'Animation Rigging',
-    intro:'Advanced construction of internal kinematic structures, joint motion constraints, and dynamic movement systems using third-party structural assets.',
     tools:'Blender Armature Suite, Inverse Kinematics (IK) Modifiers, Weight Paint Arrays',
     skills:'Skeletal bone tree development, influence mesh calculation, transformation graph keyframing, rotation logic constraints',
     reflection:'Audited imported object data structures from SketchFab and constructed precise animation bone systems. Applied balanced weight calculations to prevent surface distortions along joints during organic locomotion loop cycles.',
     images: ['Final_Exam_077162.mp4']
+  },
+  {
+    title:'AI Storybook ',
+    tools:'Google Gemini, Canva Production Suites',
+    skills:'Prompt engineering frameworks, digital asset layout compiling, editorial typesetting, document structure auditing',
+    reflection:'Succeeded in translating multi-turn model prompts into cohesive, structured storytelling formats. Balanced creative copywriting with rigorous content filtering rules to produce production-ready media logs.',
+    images: ['Beyond the Canvas Digital StoryBook Small.pdf']
   }
 ];
 
@@ -532,11 +542,13 @@ function showProject(i){
       const slide = document.createElement('div');
       slide.className = 'slide';
       
-      // Determine if media asset format is video by inspecting extension pattern
       const isVideo = imgSrc.match(/\.(mp4|webm|ogg)$/i);
+      const isPDF = imgSrc.match(/\.pdf$/i);
       
       if(isVideo) {
         slide.innerHTML = `<video src="${imgSrc}" controls loop muted playsinline></video>`;
+      } else if(isPDF) {
+        slide.innerHTML = `<iframe src="${imgSrc}#toolbar=0" type="application/pdf"></iframe>`;
       } else {
         slide.innerHTML = `<img src="${imgSrc}" onclick="openLightbox('${imgSrc}')">`;
       }
@@ -619,7 +631,6 @@ function openTab(evt,id){
 function closeModal(e){
   if(e && e.target.id!=='modal') return;
   
-  // Pause any active videos playing inside modal slides upon closure
   const modalVideos = document.querySelectorAll('#sliderWrapper video');
   modalVideos.forEach(v => v.pause());
   
