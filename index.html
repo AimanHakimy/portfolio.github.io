@@ -137,7 +137,7 @@
     
     /* Project Image Cover Styling */
     .project-cover { 
-      height: 180px; 
+      height: 220px; 
       background: #000; 
       display: flex; 
       align-items: center; 
@@ -183,17 +183,16 @@
         
     .modal { position: fixed; inset: 0; background: rgba(3, 2, 9, 0.85); backdrop-filter: blur(8px); z-index: 99; display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal.open { display: flex; }
-    .modal-inner { max-width: 780px; width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); padding: 24px; max-height: 88vh; overflow: auto; }
+    .modal-inner { max-width: 850px; width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); padding: 24px; max-height: 90vh; overflow: auto; }
     .modal-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
     .x { border: 1px solid var(--line); background: rgba(255, 255, 255, 0.03); color: var(--text); border-radius: 6px; padding: 6px 12px; cursor: pointer; font-weight: 600; }
     .x:hover { border-color: var(--accent); color: var(--accent); }
         
-    /* Custom Modern Project Slider CSS */
+    /* Custom Modern Enlarged Project Slider CSS */
     .slider-container {
       position: relative;
       width: 100%;
-      max-height: 380px;
-      height: 300px;
+      height: 480px; /* Bigger Frame Display */
       border: 1px solid var(--line);
       border-radius: 8px;
       margin-bottom: 24px;
@@ -205,6 +204,7 @@
       width: 100%;
       height: 100%;
       will-change: transform;
+      transition: transform 0.5s ease-in-out;
     }
     .slide {
       min-width: 100%;
@@ -217,7 +217,7 @@
     .slide img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: contain; /* Keeps original aspect ratio while maximizing size */
       display: block;
       cursor: zoom-in;
     }
@@ -241,8 +241,8 @@
       background: rgba(3, 2, 9, 0.65);
       border: 1px solid var(--line);
       color: var(--text);
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -274,8 +274,8 @@
       backdrop-filter: blur(4px);
     }
     .slider-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.35);
       cursor: pointer;
@@ -332,6 +332,7 @@
       .chips { justify-content: center; }
       .grid.cols-2 { grid-template-columns: 1fr; }
       .links { display: none; }
+      .slider-container { height: 320px; }
     }
     @media print {
       .topbar, .project-toolbar, .tabs, .modal, .lightbox { display: none !important; }
@@ -607,6 +608,7 @@ const projects = [
 
 let currentSlideIndex = 0;
 let currentProjectImages = [];
+let slideInterval = null;
 
 // Dynamically Render Project Thumbnails onto Gallery Cards
 function renderProjectCovers() {
@@ -621,12 +623,12 @@ function renderProjectCovers() {
     if (isVideo) {
       coverElement.innerHTML = `
         <span class="media-badge">🎬 Video Reel</span>
-        <div style="font-size:2.8rem;">🎥</div>
+        <div style="font-size:3.5rem;">🎥</div>
       `;
     } else if (isPDF) {
       coverElement.innerHTML = `
         <span class="media-badge">📖 PDF Document</span>
-        <div style="font-size:2.8rem;">📕</div>
+        <div style="font-size:3.5rem;">📕</div>
       `;
     } else if (firstMedia) {
       coverElement.innerHTML = `<img src="${firstMedia}" alt="${p.title} Preview" onerror="this.onerror=null; this.parentElement.innerHTML='🖼️';">`;
@@ -703,6 +705,7 @@ function showProject(i){
     dotsContainer.style.display = currentProjectImages.length <= 1 ? 'none' : 'flex';
     
     updateSliderPosition();
+    startAutoSlide(); // Start auto sliding
   } else {
     sliderContainer.style.display = "none";
   }
@@ -726,18 +729,46 @@ function pauseAllModalVideos() {
   modalVideos.forEach(v => v.pause());
 }
 
-function moveSlide(direction) {
+/* Auto-Slide Mechanics Engine */
+function startAutoSlide() {
+  stopAutoSlide();
+  if (currentProjectImages.length > 1) {
+    slideInterval = setInterval(() => {
+      // Don't auto-slide if current slide is a playing video or PDF
+      const activeSrc = currentProjectImages[currentSlideIndex] || '';
+      const isVideo = activeSrc.match(/\.(mp4|webm|ogg)$/i);
+      const isPDF = activeSrc.match(/\.pdf$/i);
+      
+      if (!isVideo && !isPDF) {
+        moveSlide(1, false);
+      }
+    }, 3500); // Transitions every 3.5 seconds
+  }
+}
+
+function stopAutoSlide() {
+  if (slideInterval) {
+    clearInterval(slideInterval);
+    slideInterval = null;
+  }
+}
+
+function moveSlide(direction, userAction = true) {
+  if (userAction) stopAutoSlide(); // Pause timer on manual user click
   pauseAllModalVideos();
   currentSlideIndex += direction;
   if (currentSlideIndex >= currentProjectImages.length) currentSlideIndex = 0;
   if (currentSlideIndex < 0) currentSlideIndex = currentProjectImages.length - 1;
   updateSliderPosition();
+  if (userAction) startAutoSlide(); // Resume timer
 }
 
 function goToSlide(index) {
+  stopAutoSlide();
   pauseAllModalVideos();
   currentSlideIndex = index;
   updateSliderPosition();
+  startAutoSlide();
 }
 
 function updateSliderPosition() {
@@ -773,12 +804,14 @@ function openTab(evt,id){
 function closeModal(e){
   if(e && e.target.id!=='modal') return;
   
+  stopAutoSlide();
   pauseAllModalVideos();
   
   document.getElementById('modal').classList.remove('open');
 }
 
 function openLightbox(src) {
+  stopAutoSlide();
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightboxImage');
   lbImg.src = src;
@@ -787,6 +820,7 @@ function openLightbox(src) {
 
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
+  startAutoSlide();
 }
 
 function toggleAcc(btn){
