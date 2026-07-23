@@ -518,17 +518,8 @@
           </div>
         </article>
 
-        <article class="card project-card" data-cat="Media" onclick="showProject(5)">
+        <article class="card project-card" data-cat="AI" onclick="showProject(5)">
           <div class="project-cover" id="cover-5"></div>
-          <div class="project-body">
-            <h3>Cuai - Short PSA Video</h3>
-            <p>A Public Service Announcement video emphasizing water & electricity conservation awareness.</p>
-            <span class="tag">Media Production</span><span class="tag">Video Editing</span><span class="tag">PSA</span>
-          </div>
-        </article>
-
-        <article class="card project-card" data-cat="AI" onclick="showProject(6)">
-          <div class="project-cover" id="cover-6"></div>
           <div class="project-body">
             <h3>AI Storybook</h3>
             <p>Generative creative narrative layouts using artificial intelligence models and structured PDF formatting.</p>
@@ -610,13 +601,6 @@ const projects = [
     images: ['2D.mp4']
   },
   {
-    title:'Cuai - Short Public Service Announcement (PSA)',
-    tools:'CapCut, Premiere Pro / Video Editing Tools',
-    skills:'Storyboarding, video shooting & framing, audio syncing, color grading, social media content formatting',
-    reflection:'Created a compelling short PSA video demonstrating how minor daily negligence in utilities usage leads to resource waste. Focused on pacing, visual storytelling, and clear call-to-action messaging.',
-    images: ['Cuai.mp4'] // Rename your TikTok/PSA video to Cuai.mp4 in your GitHub repository
-  },
-  {
     title:'AI Storybook',
     tools:'Google Gemini, Canva Production Suites',
     skills:'Prompt engineering frameworks, digital asset layout compiling, editorial typesetting, document structure auditing',
@@ -640,6 +624,7 @@ function renderProjectCovers() {
     const isPDF = firstMedia.match(/\.pdf$/i);
 
     if (isVideo) {
+      // Renders video first-frame directly as thumbnail
       coverElement.innerHTML = `
         <span class="media-badge">🎬 Video Reel</span>
         <video src="${firstMedia}#t=0.5" muted preload="metadata" playsinline></video>
